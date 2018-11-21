@@ -3,7 +3,7 @@ FROM debian:stable-slim
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update; \
-        apt-get install -y --no-install-recommends wget software-properties-common apt-transport-https curl gnupg libunwind8; \
+        apt-get install -y --no-install-recommends wget software-properties-common apt-transport-https curl gnupg libunwind8 nano; \
         apt-get upgrade; \
         apt-get purge -y --auto-remove
 
