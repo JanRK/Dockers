@@ -1,0 +1,15 @@
+FROM debian:stable-slim
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update; \
+        apt-get install -y --no-install-recommends wget software-properties-common apt-transport-https curl gnupg libunwind8; \
+        apt-get upgrade; \
+        apt-get purge -y --auto-remove
+
+# Kubernetes Powershell and Azure repo
+RUN wget --directory-prefix=/usr/share/keyrings https://packages.microsoft.com/keys/microsoft.asc && gpg --dearmor --yes /usr/share/keyrings/microsoft.asc; \
+		sh -c "echo 'deb [signed-by=/usr/share/keyrings/microsoft.asc.gpg] https://packages.microsoft.com/repos/microsoft-debian-stretch-prod stretch main' > /etc/apt/sources.list.d/microsoft.list"; \
+		apt-get update; \
+		apt-get install -y --no-install-recommends powershell; \
+		apt-get purge -y --auto-remove
